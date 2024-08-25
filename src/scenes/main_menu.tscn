@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwg5po33rk0qa"]
+
+[ext_resource type="Texture2D" uid="uid://dy5smdb3epufx" path="res://assets/banner.png" id="1_5fl88"]
+[ext_resource type="Script" path="res://src/scenes/main_menu.gd" id="1_s4ytx"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_s4ytx")
+
+[node name="Banner" type="Sprite2D" parent="."]
+position = Vector2(72, 56)
+texture = ExtResource("1_5fl88")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+text = "Cave Game"
+
+[node name="Button" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 8
+text = "Start"
+
+[connection signal="pressed" from="UI/VBoxContainer/Button" to="." method="_on_button_pressed"]

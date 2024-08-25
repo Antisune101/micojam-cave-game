@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://co4knrc6r0ayk"]
+
+[ext_resource type="PackedScene" uid="uid://cq0tagrmy8xnk" path="res://src/rooms/room.tscn" id="1_pe5w6"]
+
+[node name="StartRoom" instance=ExtResource("1_pe5w6")]

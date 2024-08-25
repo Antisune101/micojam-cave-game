@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dn2gjdurmt6a5"]
+
+[ext_resource type="PackedScene" uid="uid://d4ea843r6heoj" path="res://src/actors/actor.tscn" id="1_yy632"]
+[ext_resource type="Texture2D" uid="uid://dvtcrc0c1rcxf" path="res://assets/spritesheet.png" id="2_h8ds3"]
+[ext_resource type="Script" path="res://src/actors/spider/spider.gd" id="2_uy65q"]
+
+[node name="Spider" instance=ExtResource("1_yy632")]
+script = ExtResource("2_uy65q")
+
+[node name="Sprite2D" parent="." index="0"]
+region_rect = Rect2(16, 0, 16, 16)
+
+[node name="MoveArrow" type="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_h8ds3")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(80, 0, 16, 16)
+
+[node name="Down" parent="Detection" index="0"]
+collision_mask = 29
+
+[node name="Up" parent="Detection" index="1"]
+collision_mask = 29
+
+[node name="Left" parent="Detection" index="2"]
+collision_mask = 29
+
+[node name="Right" parent="Detection" index="3"]
+collision_mask = 29

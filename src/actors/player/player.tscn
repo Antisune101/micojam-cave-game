@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://cw2a4hf3o3kpj"]
+
+[ext_resource type="PackedScene" uid="uid://d4ea843r6heoj" path="res://src/actors/actor.tscn" id="1_8pxmk"]
+[ext_resource type="Script" path="res://src/actors/player/player.gd" id="2_fafv7"]
+[ext_resource type="AudioStream" uid="uid://dtdxo36kwoq00" path="res://assets/sounds/step.wav" id="3_3qtqa"]
+[ext_resource type="Script" path="res://src/actors/player/step.gd" id="4_vwwaj"]
+[ext_resource type="Texture2D" uid="uid://bvhb17fo6dnf" path="res://assets/light.png" id="5_0x16v"]
+[ext_resource type="Texture2D" uid="uid://dvtcrc0c1rcxf" path="res://assets/spritesheet.png" id="6_w7hir"]
+
+[node name="Player" instance=ExtResource("1_8pxmk")]
+script = ExtResource("2_fafv7")
+
+[node name="Step" type="AudioStreamPlayer" parent="." index="0"]
+stream = ExtResource("3_3qtqa")
+volume_db = -10.0
+script = ExtResource("4_vwwaj")
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="1"]
+position = Vector2(9, -4)
+shadow_enabled = true
+texture = ExtResource("5_0x16v")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." index="3"]
+position = Vector2(7, 1)
+rotation = -0.523598
+texture = ExtResource("6_w7hir")
+region_enabled = true
+region_rect = Rect2(16, 16, 16, 16)
+
+[node name="ActorCollider" parent="." index="4"]
+collision_layer = 2
+
+[connection signal="area_entered" from="ActorCollider" to="." method="_on_actor_collider_area_entered"]

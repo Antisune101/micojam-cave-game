@@ -1,0 +1,187 @@
+[gd_scene load_steps=11 format=3 uid="uid://bibql0hnc8bm1"]
+
+[ext_resource type="Script" path="res://src/scenes/game/cave.gd" id="1_e5p5i"]
+[ext_resource type="PackedScene" uid="uid://cw2a4hf3o3kpj" path="res://src/actors/player/player.tscn" id="2_1exkw"]
+[ext_resource type="AudioStream" uid="uid://bm05dyikndhbw" path="res://assets/sounds/pickup.wav" id="2_q857i"]
+[ext_resource type="AudioStream" uid="uid://btns5arttdoe2" path="res://assets/sounds/lose.wav" id="2_qvy4e"]
+[ext_resource type="Script" path="res://src/scenes/game/game_cam.gd" id="2_r5fpn"]
+[ext_resource type="AudioStream" uid="uid://b1sm43x7rslka" path="res://assets/sounds/win.wav" id="3_qxwq1"]
+[ext_resource type="Script" path="res://src/scenes/game/canvas_layer.gd" id="4_tye60"]
+[ext_resource type="Script" path="res://src/scenes/game/game_over.gd" id="5_cq8t4"]
+[ext_resource type="Script" path="res://src/scenes/game/pause.gd" id="6_xp31x"]
+[ext_resource type="Script" path="res://src/scenes/game/game.gd" id="9_poaf2"]
+
+[node name="Cave" type="Node2D"]
+script = ExtResource("1_e5p5i")
+
+[node name="Pickup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_q857i")
+
+[node name="LoseSound" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("2_qvy4e")
+
+[node name="WinSound" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("3_qxwq1")
+
+[node name="Rooms" type="Node" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(72, 56)
+script = ExtResource("2_r5fpn")
+
+[node name="Player" parent="." instance=ExtResource("2_1exkw")]
+top_level = true
+
+[node name="Win" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+script = ExtResource("4_tye60")
+
+[node name="ColorRect" type="ColorRect" parent="Win"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.145098, 0.145098, 0.145098, 0.729412)
+
+[node name="CenterContainer" type="CenterContainer" parent="Win"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Win/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Win/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 12
+text = "You found the exit!"
+
+[node name="WinGem" type="Label" parent="Win/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 8
+text = "Gems 6/6"
+
+[node name="Restart" type="Button" parent="Win/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Restart"
+
+[node name="Menu" type="Button" parent="Win/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Main Menu"
+
+[node name="GameOver" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+script = ExtResource("5_cq8t4")
+
+[node name="ColorRect" type="ColorRect" parent="GameOver"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.145098, 0.145098, 0.145098, 0.729412)
+
+[node name="CenterContainer" type="CenterContainer" parent="GameOver"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOver/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GameOver/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 12
+text = "You lose :("
+
+[node name="Restart" type="Button" parent="GameOver/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Restart"
+
+[node name="Menu" type="Button" parent="GameOver/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Main Menu"
+
+[node name="Pause" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+script = ExtResource("6_xp31x")
+
+[node name="ColorRect" type="ColorRect" parent="Pause"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.145098, 0.145098, 0.145098, 0.729412)
+
+[node name="CenterContainer" type="CenterContainer" parent="Pause"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Pause/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 12
+text = "Paused"
+
+[node name="Continue" type="Button" parent="Pause/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Continue"
+
+[node name="Restart" type="Button" parent="Pause/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Restart"
+
+[node name="Menu" type="Button" parent="Pause/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Main Menu"
+
+[node name="Game" type="CanvasLayer" parent="."]
+script = ExtResource("9_poaf2")
+
+[node name="GameGem" type="Label" parent="Game"]
+unique_name_in_owner = true
+offset_left = 3.0
+offset_top = 1.0
+offset_right = 58.0
+offset_bottom = 24.0
+theme_override_font_sizes/font_size = 12
+text = "Gems 0/6"
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.25613, 0.342117, 0.55842, 1)
+
+[connection signal="pressed" from="Win/CenterContainer/VBoxContainer/Restart" to="Win" method="_on_restart_pressed"]
+[connection signal="pressed" from="Win/CenterContainer/VBoxContainer/Menu" to="Win" method="_on_menu_pressed"]
+[connection signal="pressed" from="GameOver/CenterContainer/VBoxContainer/Restart" to="GameOver" method="_on_restart_pressed"]
+[connection signal="pressed" from="GameOver/CenterContainer/VBoxContainer/Menu" to="GameOver" method="_on_menu_pressed"]
+[connection signal="pressed" from="Pause/CenterContainer/VBoxContainer/Continue" to="Pause" method="_on_continue_pressed"]
+[connection signal="pressed" from="Pause/CenterContainer/VBoxContainer/Restart" to="Pause" method="_on_restart_pressed"]
+[connection signal="pressed" from="Pause/CenterContainer/VBoxContainer/Menu" to="Pause" method="_on_menu_pressed"]

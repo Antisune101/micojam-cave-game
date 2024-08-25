@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://d4ea843r6heoj"]
+
+[ext_resource type="Script" path="res://src/actors/actor.gd" id="1_8iydv"]
+[ext_resource type="Texture2D" uid="uid://dvtcrc0c1rcxf" path="res://assets/spritesheet.png" id="1_pqyxt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h4285"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cq042"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hv82l"]
+radius = 5.0
+
+[node name="Actor" type="Node2D"]
+script = ExtResource("1_8iydv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_pqyxt")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="ActorCollider" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActorCollider"]
+shape = SubResource("CircleShape2D_h4285")
+
+[node name="Detection" type="Node2D" parent="."]
+
+[node name="Down" type="Area2D" parent="Detection"]
+collision_layer = 0
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection/Down"]
+position = Vector2(0, 16)
+shape = SubResource("CircleShape2D_cq042")
+
+[node name="Up" type="Area2D" parent="Detection"]
+collision_layer = 0
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection/Up"]
+position = Vector2(0, -16)
+shape = SubResource("CircleShape2D_hv82l")
+
+[node name="Left" type="Area2D" parent="Detection"]
+collision_layer = 0
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection/Left"]
+position = Vector2(-16, 0)
+shape = SubResource("CircleShape2D_hv82l")
+
+[node name="Right" type="Area2D" parent="Detection"]
+collision_layer = 0
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection/Right"]
+position = Vector2(16, 0)
+shape = SubResource("CircleShape2D_hv82l")

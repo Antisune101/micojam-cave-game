@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbv0fociaopw"]
+
+[ext_resource type="Script" path="res://src/rooms/door.gd" id="1_2nqf8"]
+[ext_resource type="Texture2D" uid="uid://dvtcrc0c1rcxf" path="res://assets/spritesheet.png" id="2_p6qqy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_06kid"]
+size = Vector2(16, 16)
+
+[node name="Door" type="Node2D"]
+script = ExtResource("1_2nqf8")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_06kid")
+
+[node name="EnterSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_p6qqy")
+region_enabled = true
+region_rect = Rect2(48, 16, 16, 16)
+
+[node name="ExitSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_p6qqy")
+region_enabled = true
+region_rect = Rect2(64, 16, 16, 16)
+
+[node name="WallSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_p6qqy")
+region_enabled = true
+region_rect = Rect2(32, 0, 16, 16)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
